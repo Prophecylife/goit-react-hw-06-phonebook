@@ -64,8 +64,8 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  number: PropTypes.number,
 };
 
 export default Form;

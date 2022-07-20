@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import s from './contacts.module.css';
 
 const Contacts = ({ contacts, deleteContact }) => {
-  console.log(contacts);
   return (
     <ul>
       {contacts.map(({ name, number, id }) => (

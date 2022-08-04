@@ -9,24 +9,34 @@ const Form = ({ onSubmit }) => {
   const [id, setId] = useState('');
 
   const handleChange = e => {
-    const { name, value } = e.currentTarget;
-    if (name === 'name') setName(value);
-    if (name === 'number') setNumber(value);
+    const { name, value } = e.target;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        return;
+    }
     setId(nanoid());
   };
+
   const handleSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    onSubmit({ name, number, id });
     reset();
   };
 
   const reset = () => {
     setName('');
     setNumber('');
+    setId('');
   };
 
   return (
-    <form className={s.form} onSubmit={() => onSubmit(name, number, id)}>
+    <form className={s.form} onSubmit={handleSubmit}>
       <label>
         Name
         <input

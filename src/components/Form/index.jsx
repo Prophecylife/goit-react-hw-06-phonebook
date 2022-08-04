@@ -25,7 +25,7 @@ const Form = ({ onSubmit }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number, id });
+    onSubmit({ id, name, number });
     reset();
   };
 

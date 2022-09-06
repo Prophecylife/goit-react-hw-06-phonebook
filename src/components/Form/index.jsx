@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import s from './form.module.css';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'redux/conactSlice';
 
 const Form = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [id, setId] = useState('');
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -25,7 +28,9 @@ const Form = ({ onSubmit }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ id, name, number });
+    const contact = { id: nanoid(), name, number };
+    dispatch(addContact());
+    // onSubmit({ id, name, number });
     reset();
   };
 

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import s from './form.module.css';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/conactSlice';
 
-const Form = ({ onSubmit }) => {
+const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [id, setId] = useState('');
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -23,21 +22,20 @@ const Form = ({ onSubmit }) => {
       default:
         return;
     }
-    setId(nanoid());
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const contact = { id: nanoid(), name, number };
-    dispatch(addContact());
-    // onSubmit({ id, name, number });
+    const contact = { id: nanoid(), name: name, number: number };
+    contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())
+      ? alert(`${name} - already exists`)
+      : dispatch(addContact(contact));
     reset();
   };
 
   const reset = () => {
     setName('');
     setNumber('');
-    setId('');
   };
 
   return (
@@ -73,12 +71,6 @@ const Form = ({ onSubmit }) => {
       </button>
     </form>
   );
-};
-
-Form.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.number,
-  id: PropTypes.string,
 };
 
 export default Form;

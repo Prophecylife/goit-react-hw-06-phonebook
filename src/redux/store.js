@@ -17,6 +17,8 @@ const persistConfig = {
   key: 'contacts',
   version: 1,
   storage,
+  //   have to blacklist filter so it doesn't save on page reload
+  blacklist: 'filter',
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

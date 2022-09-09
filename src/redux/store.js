@@ -16,9 +16,9 @@ import rootReducer from './conactSlice';
 const persistConfig = {
   key: 'contacts',
   version: 1,
-  storage,
+  storage: storage,
   //   have to blacklist filter so it doesn't save on page reload
-  blacklist: 'filter',
+  blacklist: ['filter'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

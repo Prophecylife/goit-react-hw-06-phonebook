@@ -15,10 +15,10 @@ import rootReducer from './conactSlice';
 
 const persistConfig = {
   key: 'contacts',
-  version: 1,
   storage: storage,
   //   have to blacklist filter so it doesn't save on page reload
   blacklist: ['filter'],
+  //   whitelist: ['items'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
